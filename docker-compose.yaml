@@ -1,0 +1,32 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ffleandro/node-typescript-serverless-example-service:latest
+    command: npm run dev
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - dynamodb
+    links:
+      - dynamodb
+    environment:
+      COGNITO_REGION: ${COGNITO_REGION}
+      COGNITO_POOL_ID: ${COGNITO_POOL_ID}
+      DYNAMODB_REGION: ${DYNAMODB_REGION}
+      DYNAMODB_ENDPOINT: ${DYNAMODB_ENDPOINT}
+      AWS_SDK_LOAD_CONFIG: 1
+    volumes:
+    - $HOME/.aws:/root/.aws:ro
+  dynamodb:
+    image:  amazon/dynamodb-local
+    container_name: dynamodb-local
+    hostname: dynamodb
+    restart: always
+    volumes:
+      - ./my-dynamodb-data:/home/dynamodblocal/data
+    working_dir: /home/dynamodblocal
+    ports:
+      - 8000:8000
+    command: "-jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/"

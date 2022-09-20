@@ -1,0 +1,32 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true,
+        "jest": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:json/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2021,
+        "sourceType": "module",
+        "project": ["tsconfig.json"]
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "ignorePatterns": [ "jest.config.*", "dotenv.config.*", "build", "dist" ],
+    "rules": {
+        "indent": [ "error", 2 ],
+        "linebreak-style": [ "error", "unix" ],
+        "quotes": [ "error", "single" ],
+        "semi": [ "error", "always" ],
+        "eol-last": 1,
+        "max-len": ["warn", { "code": 120, "ignoreComments": true }],
+        "@typescript-eslint/no-throw-literal": "error"
+    }
+}

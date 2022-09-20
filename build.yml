@@ -1,0 +1,16 @@
+options:
+  concurrency: 0 # Use all CPUs
+  includeSourceMaps: true
+
+packages:
+  api:
+    cwd: build
+    output: ../dist/app.zip
+    trace:
+      - index.js
+      - src/api
+    include:
+      - src/api
+      - src/server/local.js
+      - ../package.json
+      - ../node_modules/dotenv
